@@ -4,6 +4,7 @@ import { AppContext } from "../App";
 import PokeCards from "../Components/PokeCards";
 import { Button, Card, Navbar, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { PokeContext } from "../Components/Context";
 
 export default function GeneratePoke() {
     const [height, setHeight] = useState(0);
@@ -14,7 +15,7 @@ export default function GeneratePoke() {
     const [card, setCard] = useState({});
     const [generated, setGenerated] = useState(false);
 
-    const { addCard, cardsShow, Logout, showCards } = useContext(AppContext);
+    const { addCard, cardsShow, Logout, showCards } = useContext(PokeContext);
 
     useEffect(() => {
         fetch(`https://pokeapi.co/api/v2/pokemon/${poke_id}`)

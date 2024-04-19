@@ -1,11 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import Landing from '../assets/landing.jpg';
-import { AppContext } from '../App';
+
 import PokeLogue from '../Components/PokeLogue';
 import PokeCards from '../Components/PokeCards';
+import { PokeContext } from '../Components/Context';
 
 export default function Home() {
     const [poke_id, setPoke_id] = useState(0);
@@ -13,8 +14,14 @@ export default function Home() {
     const [searchInput, setSearchInput] = useState('');
     const [filter, setFilter] = useState(0);
     // const [selected, setSelected]=useState('')
+    const nav = useNavigate();
 
-    const { showCards, cardsShow, addFav, name, setName, Logout } = useContext(AppContext);
+    const { showCards, cardsShow, addFav, name, setName, Logout } = useContext(PokeContext);
+
+    const setLogout = ()=>{
+        Logout();
+        nav('/')
+    }
 
     const fetchSpecies = () => {
         fetch("https://pokeapi.co/api/v2/pokemon-species?limit=10&offset=0")
@@ -41,7 +48,7 @@ export default function Home() {
                     <Nav className="mr-auto">
                         <Nav.Link onClick={() => showCards(true)} style={{ color: 'white' }}>See Cards</Nav.Link>
                         <Nav.Link as={Link} to="/review" style={{ color: 'white' }}>Submit Review</Nav.Link>
-                        <Nav.Link className="nav-link" style={{ color: 'white' }} onClick={Logout} to='/'>Logout</Nav.Link>
+                        <Nav.Link className="nav-link" style={{ color: 'white' }} onClick={setLogout} to='/'>Logout</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
@@ -54,7 +61,7 @@ export default function Home() {
 
             {cardsShow && <PokeCards />}
 
-            <div id='pokemons'>
+            <div id='pokemons' style={{marginTop: "10px"}}>
                 <form>
                     <input
                         type='text'

@@ -5,6 +5,7 @@ import { AppContext } from "../App";
 import PokeCards from "../Components/PokeCards";
 import { Navbar, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { PokeContext } from "../Components/Context";
 
 export default function PokeHome() {
     const { poke_id } = useParams();
@@ -17,7 +18,7 @@ export default function PokeHome() {
     const [pokeName, setPokeName] = useState('');
     const nodeRef = useRef(null);
 
-    const { showCards, cardsShow, addFav, Logout } = useContext(AppContext)
+    const { showCards, cardsShow, addFav, Logout } = useContext(PokeContext)
 
     useEffect(() => {
         fetch(`https://pokeapi.co/api/v2/pokemon/${poke_id}/`)

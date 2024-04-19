@@ -37,7 +37,7 @@ export default function Poke(props) {
     }
 
     return (
-        <div id="poke_data">
+        <div id="poke_data" style={{marginTop: "10px"}}>
             <p>{props.name}</p>
             <button onClick={handleClick}>See Pokemon Page</button>
             <button onClick={fav}>Add Pokemon to favourites</button>

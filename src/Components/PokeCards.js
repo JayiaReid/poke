@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { Card } from 'react-bootstrap';
 import { AppContext } from "../App";
+import { PokeContext } from './Context';
 
 export default function PokeCards() {
-    const { cards, favs } = useContext(AppContext);
+    const { cards, favs } = useContext(PokeContext);
 
     return (
         <div id="cards">

@@ -9,33 +9,16 @@ import LoginSignup from './Pages/LoginSignUp';
 // import MonthPoke from './Pages/MonthPoke';
 import SubmitReview from './Pages/SubmitReview';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { PokeContextProvider } from './Components/Context';
 
-const AppContext = createContext();
+
 
 function App(props){
-  const [logIn, setLogIn] = useState(false);
-  const [name, setName] = useState("ditto");
-  const [cards, setCards]=useState([])
-  const [favs, setFavs]=useState([])
-  //these are declared because can be pop up anywhere 
-  const [cardsShow, showCards]=useState(false);
-  const [favsShow, showFavs]=useState(false);
-
-  const Logout = () => {
-    setLogIn(false);
-  };
-
-  const addCard = (card) => {
-    setCards([...cards, card]);
-  };
-
-  const addFav = (fav) => {
-    setFavs([...favs, fav]);
-  };
+  
 
   return (
     <div className="App">
-      <AppContext.Provider value={{ Logout, setLogIn, setName, name, addCard, cards, addFav, favs,  cardsShow, showCards, favsShow, showFavs }}>
+      <PokeContextProvider >
         <BrowserRouter>
           <Routes>
             <Route path='/home' element={<Home />} />
@@ -49,10 +32,10 @@ function App(props){
             <Route index path='/' element={<LoginSignup />} />
           </Routes>
         </BrowserRouter>
-      </AppContext.Provider>
+      </PokeContextProvider>
     </div>
   );
 }
-export {AppContext}
+
 export default App;
 
